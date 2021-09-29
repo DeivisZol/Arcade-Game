@@ -29,6 +29,10 @@ public class InputHandler implements KeyListener {
     public Key down = new Key();
     public Key left = new Key();
     public Key right = new Key();
+    public Key shootUp = new Key();
+    public Key shootDown = new Key();
+    public Key shootLeft = new Key();
+    public Key shootRight = new Key();
 
     public void keyPressed(KeyEvent e) {
         toggleKey(e.getKeyCode(),true);
@@ -43,17 +47,32 @@ public class InputHandler implements KeyListener {
     }
 
     public void toggleKey(int keyCode, boolean isPressed) {
-        if(keyCode == KeyEvent.VK_W || keyCode == KeyEvent.VK_UP) {
+        //walking buttons
+        if(keyCode == KeyEvent.VK_W) {
             up.toggle(isPressed);
         }
-        if(keyCode == KeyEvent.VK_S || keyCode == KeyEvent.VK_DOWN) {
+        if(keyCode == KeyEvent.VK_S) {
             down.toggle(isPressed);
         }
-        if(keyCode == KeyEvent.VK_A || keyCode == KeyEvent.VK_LEFT) {
+        if(keyCode == KeyEvent.VK_A) {
             left.toggle(isPressed);
         }
-        if(keyCode == KeyEvent.VK_D || keyCode == KeyEvent.VK_RIGHT) {
+        if(keyCode == KeyEvent.VK_D) {
             right.toggle(isPressed);
+        }
+
+        //shooting buttons
+        if(keyCode == KeyEvent.VK_UP){
+            shootUp.toggle(isPressed);
+        }
+        if(keyCode == KeyEvent.VK_DOWN){
+            shootDown.toggle(isPressed);
+        }
+        if(keyCode == KeyEvent.VK_LEFT){
+            shootLeft.toggle(isPressed);
+        }
+        if(keyCode == KeyEvent.VK_RIGHT){
+            shootRight.toggle(isPressed);
         }
     }
 }

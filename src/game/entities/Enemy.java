@@ -15,11 +15,14 @@ public class Enemy extends Mob{
     public void tick() {
     }
 
+    public void walkTowardsPlayer() {
+
+    }
 
     public void render(Screen screen) {
         int xTile =0;
         int yTile =28;
-        screen.render(0,0,xTile+yTile*32,colour,0x00,scale);
+        screen.render(0,0,xTile+yTile*31,colour,0x00,scale);
     }
 
 

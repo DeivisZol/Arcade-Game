@@ -1,11 +1,15 @@
 package game.main;
+/*
+ @author Deivis Zolba
+  *Vilnius University, Informatics group 2.
+  *2D game in pure JAVA
+ */
 
+import game.entities.Bullet;
 import game.entities.Enemy;
 import game.entities.Player;
-import game.gfx.Colours;
 import game.gfx.Screen;
 import game.gfx.SpriteSheet;
-import game.gfx.Font;
 import game.level.Level;
 
 import javax.swing.JFrame;
@@ -15,11 +19,12 @@ import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferInt;
 
 public class Game extends Canvas implements Runnable{
+
     private static final long serialVersion = 1;
 
     public static final int WIDTH = 280;
     public static final int HEIGHT = WIDTH/ 12 * 9;
-    public static final int SCALE = 4;
+    public static final int SCALE = 5;
     public static final String NAME = "Game";
 
     public boolean running = false;
@@ -34,6 +39,7 @@ public class Game extends Canvas implements Runnable{
     public Level level;
     public Player player;
     public Enemy enemy;
+    public Bullet bullet;
 
     public Game() {
         setMinimumSize(new Dimension(WIDTH*SCALE,HEIGHT*SCALE));
@@ -69,10 +75,10 @@ public class Game extends Canvas implements Runnable{
         screen = new Screen(WIDTH, HEIGHT, new SpriteSheet("/Sprite_sheet.png"));
         input = new InputHandler(this);
         level = new Level("/levels/level2.png");
-        player = new Player(level,16,16,2,input);
-        //enemy = new Enemy(level, "bob",0,0,2);
+        player = new Player(level,60,16,1,input);
+        enemy = new Enemy(level, "bob",30,30,4);
         level.addEntity(player);
-        //level.addEntity(enemy);
+        level.addEntity(enemy);
     }
 
     public synchronized void start() {
@@ -123,6 +129,30 @@ public class Game extends Canvas implements Runnable{
     }
 
     public void tick() {
+        if(input.shootUp.isPressed()) {
+            if(tickCount %30 == 0){
+                bullet = new Bullet(level, "bullet", player.x, player.y, 2, 0);
+                level.addEntity(bullet);
+            }
+        }else
+        if(input.shootDown.isPressed()) {
+            if(tickCount %30 == 0) {
+                bullet = new Bullet(level, "bullet", player.x, player.y, 2, 1);
+                level.addEntity(bullet);
+            }
+        }else
+        if(input.shootLeft.isPressed()) {
+            if(tickCount %30 == 0) {
+                bullet = new Bullet(level, "bullet", player.x, player.y, 2, 2);
+                level.addEntity(bullet);
+            }
+        }else
+        if(input.shootRight.isPressed()) {
+            if(tickCount %30 == 0) {
+                bullet = new Bullet(level, "bullet", player.x, player.y, 2, 3);
+                level.addEntity(bullet);
+            }
+        }
         tickCount++;
         level.tick();
     }

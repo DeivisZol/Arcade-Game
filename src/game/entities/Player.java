@@ -38,6 +38,19 @@ public class Player extends Mob{
         } else {
             isMoving = false;
         }
+
+        if(input.shootUp.isPressed()) {
+            new Bullet(level,"bullet",x,y,4,0);
+        }
+        if(input.shootDown.isPressed()) {
+            new Bullet(level,"bullet",x,y,4,1);
+        }
+        if(input.shootLeft.isPressed()) {
+            new Bullet(level,"bullet",x,y,4,2);
+        }
+        if(input.shootRight.isPressed()) {
+            new Bullet(level,"bullet",x,y,4,3);
+        }
     }
 
     public void render(Screen screen) {
